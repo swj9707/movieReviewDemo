@@ -33,7 +33,7 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public Long register(MovieDTO movieDTO){
         Map<String, Object> entityMap = dtoToEntity(movieDTO);
-        Movie movie = (Movie) entityMap.get("Movie");
+        Movie movie = (Movie) entityMap.get("movie");
         List<MovieImage> movieImageList = (List<MovieImage>) entityMap.get("imgList");
 
         movieRepository.save(movie);
@@ -59,7 +59,8 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public MovieDTO getMovie(Long mno){
+    public MovieDTO getMovie(Long mno) {
+
         List<Object[]> result = movieRepository.getMovieWithAll(mno);
 
         Movie movie = (Movie) result.get(0)[0];
@@ -67,7 +68,7 @@ public class MovieServiceImpl implements MovieService{
         List<MovieImage> movieImageList = new ArrayList<>();
 
         result.forEach(arr -> {
-            MovieImage movieImage = (MovieImage) arr[1];
+            MovieImage  movieImage = (MovieImage)arr[1];
             movieImageList.add(movieImage);
         });
 
